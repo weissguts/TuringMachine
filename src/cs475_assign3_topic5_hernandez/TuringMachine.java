@@ -135,12 +135,11 @@ public class TuringMachine {
      * @param input
      * @return
      */
-    public static boolean run(String input) {     
+    public static boolean run(String input) {
         currentState = startState;
         Tape tapeList = new Tape();
-        int headPostion = 1;
-        
-        
+        int headPosition = 1;
+
         for (char inputChar : input.toCharArray()) {
             tapeList.addCells(1, inputChar);
             System.out.println("current state is "
@@ -148,36 +147,49 @@ public class TuringMachine {
             if (!inputAlphabet.contains(inputChar)) {
                 return false;
             }
-            
+
             for (Transition transition : transitions) {
+                String tapeHead = tapeList.toString(headPosition);
+                char inputSymbolChar = transition.getInputSymbol();
+                String inputSymbolString = String.valueOf(inputSymbolChar);
+                boolean stateCheck = (tapeHead == inputSymbolString);
+                boolean boolHead = tapeList.toString(headPosition).equals(transition.getInputSymbol());
+
                 System.out.println(transition.toString());
+
+                if (transition.getWriteSymbol() == ' ') {
+                    transition.setWriteSymbol('B');
+                }
+               
+                while (boolHead && stateCheck) {
+                    tapeList.removeCells(headPosition);
+                    tapeList.addCells(headPosition, transition.getWriteSymbol());
+
+                    if (transition.getDirection() == 'R') {
+                        headPosition++;
+                    } else if (transition.getDirection() == 'L') {
+                        headPosition--;
+                    }
+
+                }
+
+//                System.out.println("Check " + tapeList.toString(headPosition));
             }
-            
-            
+
+        }
+        if (!acceptStates.contains(currentState)) {
+            return false;
         }
 
         //Code to properly add/remove from tapeList via the current headPosition.
-//        tapeList.setHeadPosition(headPostion);
-//        tapeList.removeCells(headPostion);
+//        tapeList.setHeadPosition(headPosition);
+//        tapeList.removeCells(headPosition);
 //        tapeList.addCells(tapeList.getHeadPosition(), 'T');
 //        System.out.println("Test");
         //Read index[1] of tapeList
         //Compare to line Transitions. 
         //Replace with writeSymbol
         //Move headPosition to right or left. 
-        
-      
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
         return true;
     }
 

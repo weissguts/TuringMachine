@@ -51,6 +51,9 @@ public class Tape {
         this.headPosition = headPosition;
     }
     
+    public String toString(int headPosition) {
+        return this.cells.get(headPosition).toString();
+    }
     
 
      

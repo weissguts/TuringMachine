@@ -1,5 +1,5 @@
 q1
-qAccept
+qA
 q1 (0,x,R) q2
 q1 (1,x,R) q3
 q1 ( , ,L) q1
@@ -18,4 +18,4 @@ q6 (0,x,R) q7
 q7 (0,x,L) q7
 q7 (1,x,L) q7
 q7 (x, ,R) q1
-q8 ( , ,R) qAccept
+q8 ( , ,R) qA

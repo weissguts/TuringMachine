@@ -31,7 +31,7 @@ public class CS475_Assign3_Topic5_Hernandez {
         inputString = optionPane.getInputString();
         accepted = turingMachine.run(inputString);
         //displays whether the TM accepts the user’s input string (use JOptionPane).
-//        optionPane.displayAccepted(accepted);
+        optionPane.displayAccepted(accepted);
         //as Java comments give the Big-O analysis of the fileInput and run methods
         //as a separate file, submit the TM file you “unit” tested on.
 

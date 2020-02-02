@@ -76,7 +76,7 @@ public class Transition {
 
     public String toString() {
         return "FromState: " + this.fromState + ", (" + 
-                this.inputSymbol + ", " + this.writeSymbol + ", " + 
+                this.inputSymbol + "," + this.writeSymbol + "," + 
                 this.direction + "), " + "ToState: " + this.toState + ".";
     }
 }
