@@ -141,32 +141,36 @@ public class TuringMachine {
         int headPosition = 1;
 
         for (char inputChar : input.toCharArray()) {
-            tapeList.addCells(headPosition, inputChar);
             System.out.println("current state is "
                     + currentState);
-            if (!inputAlphabet.contains(inputChar)) {
-                return false;
-            }
+            tapeList.addCells(headPosition, inputChar);
+//            if (!inputAlphabet.contains(inputChar)) {
+//                return false;
+//            }
 
             for (Transition transition : transitions) {
-                if (transition.getInputSymbol()== ' ') {
+                //If transition.getInputSymbol is blank in the inputTextFile
+                //Convert to 'B';
+                if (transition.getInputSymbol() == ' ') {
                     transition.setInputSymbol('B');
                 }
-                    
-                String tapeHead = tapeList.toString(headPosition);                
+                //If transition.getWriteSymbol is blank in the inputTextFile
+                //Convert to 'B';
+                if (transition.getWriteSymbol() == ' ') {
+                    transition.setWriteSymbol('B');
+                }
+
+                String tapeHead = tapeList.toString(headPosition);
                 char inputSymbolChar = transition.getInputSymbol();
                 String inputSymbolString = String.valueOf(inputSymbolChar);
-                
+
                 boolean stateCheck = (currentState.equals(transition.getFromState()));
                 boolean boolHead = (tapeHead.equals(inputSymbolString));
 
                 System.out.println(transition.toString());
 
-                if (transition.getWriteSymbol() == ' ') {
-                    transition.setWriteSymbol('B');
-                }
-               
                 while (boolHead && stateCheck) {
+                    currentState = transition.getToState();
                     tapeList.removeCells(headPosition);
                     tapeList.addCells(headPosition, transition.getWriteSymbol());
 
@@ -184,6 +188,10 @@ public class TuringMachine {
             }
 
         }
+        System.out.println("current state is "
+                + currentState);
+        
+        
         if (!acceptStates.contains(currentState)) {
             return false;
         }
