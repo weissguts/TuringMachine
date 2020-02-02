@@ -34,8 +34,8 @@ public class Tape {
         this.cells = cells;
     }
     
-    public void addCells(char charCell) {
-        cells.add(charCell);  
+    public void addCells(int headPostion, char charCell) {
+        cells.add(headPostion, charCell);  
        
     }
     
