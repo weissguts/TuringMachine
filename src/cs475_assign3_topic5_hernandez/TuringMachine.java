@@ -109,7 +109,7 @@ public class TuringMachine {
                 direction, toState);
         transitions.add(transition);        
         
-        //add to inputAlphabet unless input is 'e'. 'e' is for empty input.
+        //add to inputAlphabet unless input a non integer or repeated integer.
         if (!inputAlphabet.contains(transition.getInputSymbol())
                 && (Character.isDigit(transition.getInputSymbol()) )){
             inputAlphabet.add(transition.getInputSymbol());
