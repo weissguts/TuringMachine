@@ -22,7 +22,13 @@ public class Tape {
     
     
     public Tape() {
-        this.cells.add('$');    
+        this.cells.add('$');  
+        
+        //Initialize with size of 
+        for (int i = 1; i < 65; i++) {
+            this.cells.add(' ');
+        }
+        
         this.headPosition = 0;
     }   
 
@@ -34,8 +40,8 @@ public class Tape {
         this.cells = cells;
     }
     
-    public void addCells(int headPostion, char charCell) {
-        cells.add(headPostion, charCell);  
+    public void addCells(int headPosition, char charCell) {
+        cells.add(headPosition, charCell);  
        
     }
     

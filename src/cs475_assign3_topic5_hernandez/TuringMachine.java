@@ -141,7 +141,7 @@ public class TuringMachine {
         int headPosition = 1;
 
         for (char inputChar : input.toCharArray()) {
-            tapeList.addCells(1, inputChar);
+            tapeList.addCells(headPosition, inputChar);
             System.out.println("current state is "
                     + currentState);
             if (!inputAlphabet.contains(inputChar)) {
@@ -149,11 +149,16 @@ public class TuringMachine {
             }
 
             for (Transition transition : transitions) {
-                String tapeHead = tapeList.toString(headPosition);
+                if (transition.getInputSymbol()== ' ') {
+                    transition.setInputSymbol('B');
+                }
+                    
+                String tapeHead = tapeList.toString(headPosition);                
                 char inputSymbolChar = transition.getInputSymbol();
                 String inputSymbolString = String.valueOf(inputSymbolChar);
-                boolean stateCheck = (tapeHead == inputSymbolString);
-                boolean boolHead = tapeList.toString(headPosition).equals(transition.getInputSymbol());
+                
+                boolean stateCheck = (currentState.equals(transition.getFromState()));
+                boolean boolHead = (tapeHead.equals(inputSymbolString));
 
                 System.out.println(transition.toString());
 
@@ -167,8 +172,10 @@ public class TuringMachine {
 
                     if (transition.getDirection() == 'R') {
                         headPosition++;
+                        break;
                     } else if (transition.getDirection() == 'L') {
                         headPosition--;
+                        break;
                     }
 
                 }
