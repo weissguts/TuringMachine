@@ -14,9 +14,47 @@ import java.util.List;
  *
  * @author Daniel Hernandez
  */
-public class Tape {
+public class Tape {    
+        
+    public static ArrayList<Character> cells = new ArrayList<>();
+    public static int headPosition;
+
     
-    private List<Character> cells = new ArrayList<>();
-    private int headPosition;
+    
+    public Tape() {
+        this.cells.add('$');    
+        this.headPosition = 0;
+    }   
+
+    public static ArrayList<Character> getCells() {
+        return cells;
+    }
+
+    public void setCells(ArrayList<Character> cells) {
+        this.cells = cells;
+    }
+    
+    public void addCells(char charCell) {
+        cells.add(charCell);  
+       
+    }
+    
+    public void removeCells(int headPosition) {
+        cells.remove(headPosition);        
+    }
+
+    public int getHeadPosition() {
+        return headPosition;
+    }
+
+    public void setHeadPosition(int headPosition) {
+        this.headPosition = headPosition;
+    }
+    
+    
+
+     
+   
+    
 
 }

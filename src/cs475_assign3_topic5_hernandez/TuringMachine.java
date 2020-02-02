@@ -18,8 +18,7 @@ import java.util.List;
  * 
  * @author Daniel Hernandez
  */
-public class TuringMachine {
-    static Tape stack = new Tape();
+public class TuringMachine {    
 
     private static String startState;
     private static List<String> acceptStates = new ArrayList<>();
@@ -30,7 +29,8 @@ public class TuringMachine {
     static List<Transition> transitions = new ArrayList<>();
     private static String currentState;
     static List<Character> inputAlphabet = new ArrayList<>();
-    static List<Character> tapeAlphabet = new ArrayList<>();
+    static List<Character> tapeAlphabet = new ArrayList<>();    
+    
 
     /**
      * Pop up box to user to select file for DPA guidelines.
@@ -94,6 +94,9 @@ public class TuringMachine {
 
     /**
      * Reads transition line updates states. 
+     * Currently will only work up to state q9. Will need extra logic
+     * coded in future for states q10 and up. Reminder to myself to also
+     * rework this with Java Regex rather than .split(). 
      * @param nextLine
      */
     public static void readTransition(String nextLine) {
@@ -129,12 +132,30 @@ public class TuringMachine {
      * number of transitions, and number of stackOperation Strings we convert
      * to charArrays. - 3 loops should be O(N^3).
      *
-     * Compares user input String char by char against acceptable DPA
-     * guidelines.
-     *
      * @param input
      * @return
      */
+    
+    public static boolean run(String input) {           
+        Tape tapeList = new Tape(); 
+        int headPostion = 0;
+        for (char inputChar: input.toCharArray()) {
+            tapeList.addCells(inputChar);
+            headPostion ++;
+        }
+        
+        tapeList.removeCells(headPostion);
+        System.out.println("CHECKER " + tapeList.getHeadPosition());
+        
+        //Read index[1] of tapeList
+        //Compare to line Transitions. 
+        //Replace with writeSymbol
+        //Move headPosition to right or left. 
+        
+        return true;
+    }
+    
+    
 
 
     /**

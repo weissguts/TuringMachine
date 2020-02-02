@@ -19,23 +19,22 @@ public class CS475_Assign3_Topic5_Hernandez {
     static boolean accepted = false;
 
     public static void main(String[] args) throws FileNotFoundException, IOException {
-        
+
         TuringMachine turingMachine = new TuringMachine();
-    //prompts the user for a file location (use JFileChooser)
+        //prompts the user for a file location (use JFileChooser)
         turingMachine.chooseFile();
-    //reads a Turing machine (TM) from a text file (see format below),
+        //reads a Turing machine (TM) from a text file (see format below),
         turingMachine.processFile();
-    //displays to the user the alphabet associated with the TM that was read
+        //displays to the user the alphabet associated with the TM that was read
         turingMachine.displayAlphabet();
-    //prompts the user for an input string (use JOptionPane),
-//        inputString = optionPane.getInputString();
-//        accepted = turingMachine.run(inputString);
-    //displays whether the TM accepts the user’s input string (use JOptionPane).
+        //prompts the user for an input string (use JOptionPane),
+        inputString = optionPane.getInputString();
+        accepted = turingMachine.run(inputString);
+        //displays whether the TM accepts the user’s input string (use JOptionPane).
 //        optionPane.displayAccepted(accepted);
-    //as Java comments give the Big-O analysis of the fileInput and run methods
-    //as a separate file, submit the TM file you “unit” tested on.
-    
-    
+        //as Java comments give the Big-O analysis of the fileInput and run methods
+        //as a separate file, submit the TM file you “unit” tested on.
+
     }
 
 }
