@@ -7,14 +7,19 @@ q1 (x, ,L) q1
 q1 ($, ,R) q8
 q2 (0,x,R) q2
 q2 (1,x,R) q4
+q2 (x, ,R) q1
 q3 (1,x,R) q3
 q3 (0,x,R) q4
+q3 (x, ,R) q1
 q4 (0,x,R) q5
 q4 (1,x,R) q6
+q4 (x, ,R) q1
 q5 (0,x,R) q5
 q5 (1,x,R) q7
+q5 (x, ,R) q1
 q6 (1,x,R) q6
 q6 (0,x,R) q7
+q6 (x, ,R) q1
 q7 (0,x,L) q7
 q7 (1,x,L) q7
 q7 (x, ,R) q1

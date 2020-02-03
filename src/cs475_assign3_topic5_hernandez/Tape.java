@@ -11,7 +11,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- *
+ * Tape for Turing Machine class to check against the inputTextFile and 
+ * transitions. 
  * @author Daniel Hernandez
  */
 public class Tape {
@@ -19,6 +20,8 @@ public class Tape {
     public static ArrayList<Character> cells = new ArrayList<>();
     public static int headPosition;
 
+    //Initialize Tape with $ to empty ArrayList. Add 64 indexes to allow for
+    //64 bit strings.
     public Tape() {
         this.cells.add('$');
 

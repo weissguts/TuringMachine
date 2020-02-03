@@ -9,7 +9,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 /**
- *
+ * Main Class - Creates a Turing Machine from inputFile. Tests user input 
+ * string to see if language is acceptable. Current max input allowed will be 
+ * 64 bits. Max digits for acceptable States is two (example q1 or qA). 
  * @author Daniel Hernandez
  */
 public class CS475_Assign3_Topic5_Hernandez {

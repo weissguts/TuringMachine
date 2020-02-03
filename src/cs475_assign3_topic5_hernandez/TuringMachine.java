@@ -32,7 +32,7 @@ public class TuringMachine {
     static List<Character> tapeAlphabet = new ArrayList<>();
 
     /**
-     * Pop up box to user to select file for DPA guidelines.
+     * Pop up box to user to select file for Turing Machine guidelines.
      *
      * @throws FileNotFoundException
      */
@@ -46,7 +46,7 @@ public class TuringMachine {
      * processFile - Big O for fileInput and processFile is O(n) since we are
      * just iterating through the while loop and there is nothing nested inside.
      *
-     * Sets the DPA guidelines to test against user input string.
+     * Sets the Turing Machine guidelines to test against user input string.
      *
      * @throws IOException
      */
@@ -74,7 +74,7 @@ public class TuringMachine {
     }
 
     /**
-     * Sets start state to first line from DPA guidelines file.
+     * Sets start state to first line from Turing Machine guidelines file.
      *
      * @param firstLine
      */
@@ -93,9 +93,9 @@ public class TuringMachine {
 
     /**
      * Reads transition line updates states. Currently will only work up to
-     * state q9. Will need extra logic coded in future for states q10 and up.
-     * Reminder to myself to also rework this with Java Regex rather than
-     * .split().
+     * state q9 or a combo q+letter (qA); 2 digits. Will need extra logic coded
+     * in future for states q10 and up. Reminder to myself to also rework this
+     * with Java Regex rather than .split().
      *
      * @param nextLine
      */
@@ -128,9 +128,21 @@ public class TuringMachine {
     }
 
     /**
-     * run - Big O for run method is O(N^3) where "N" is input string length,
-     * number of transitions, and number of stackOperation Strings we convert to
-     * charArrays. - 3 loops should be O(N^3).
+     * run - Big O for run method is O(N^3 * M^2) ) where "N" is input string
+     * length, number of transitions, and number of times we update Tape
+     * tapeList. 
+     * (If needed) --> "M" is the extra while Loop we had after we do our first
+     * run through the Turing Machine. It also is the extra For Loop as well to
+     * rerun through updated transitions. 
+     * This will continue to loop until tapeList is
+     * empty. - 3 initial loops should be O(N^3) * 2 extra loops(M^2).
+     *
+     * **When run first goes through it's initial loops O(N^3); it is also
+     * updating the transitions with Turing Machine logic for empty spaces.
+     * (Example: ' ' -> 'B'.
+     *
+     * ***After this initial run we now need to continuously run through the
+     * Turing Machine until
      *
      * @param input
      * @return
@@ -140,14 +152,16 @@ public class TuringMachine {
         Tape tapeList = new Tape();
         int headPosition = 1;
 
+        //Add input to TapeCell based on head position.
         for (char inputChar : input.toCharArray()) {
-            System.out.println("current state is "
+            System.out.println("Current state is "
                     + currentState + ".");
             tapeList.addCells(headPosition, inputChar);
             if (!inputAlphabet.contains(inputChar)) {
                 return false;
             }
 
+            //Lookup transitions for current state.
             for (Transition transition : transitions) {
                 //If transition.getInputSymbol is blank in the inputTextFile
                 //Convert to 'B';
@@ -188,15 +202,18 @@ public class TuringMachine {
         System.out.println("current state is "
                 + currentState);
 
+        //Break out of run() if currentHead is empty.
         if (tapeList.checkBasePosition(headPosition)) {
             return false;
         }
         System.out.println("Initial run over. More transitions found based "
                 + "on current headPosition. Continuining run():  ");
+        
+        //Run Tape through Transitions(updated) again if tapeList[0] == $. 
         while (tapeList.checkBasePosition(0)) {
-                System.out.println("Current state is "
+            System.out.println("Current state is "
                     + currentState + ".");
-                
+
             for (Transition transition : transitions) {
                 String tapeHead = tapeList.toString(headPosition);
                 char inputSymbolChar = transition.getInputSymbol();
@@ -204,12 +221,11 @@ public class TuringMachine {
 
                 boolean stateCheck = (currentState.equals(transition.getFromState()));
                 boolean boolHead = (tapeHead.equals(inputSymbolString));
-                
-                
+
                 System.out.println(transition.toString() + "Current head is: "
                         + tapeHead + ".");
 
-                while (boolHead && stateCheck) {                    
+                while (boolHead && stateCheck) {
                     currentState = transition.getToState();
                     tapeList.removeCells(headPosition);
                     tapeList.addCells(headPosition, transition.getWriteSymbol());
@@ -221,9 +237,7 @@ public class TuringMachine {
                         headPosition--;
                         break;
                     }
-
                 }
-                
 
             }
         }
@@ -234,21 +248,12 @@ public class TuringMachine {
             return false;
         }
 
-        //Code to properly add/remove from tapeList via the current headPosition.
-//        tapeList.setHeadPosition(headPosition);
-//        tapeList.removeCells(headPosition);
-//        tapeList.addCells(tapeList.getHeadPosition(), 'T');
-//        System.out.println("Test");
-        //Read index[1] of tapeList
-        //Compare to line Transitions. 
-        //Replace with writeSymbol
-        //Move headPosition to right or left. 
         return true;
     }
 
     /**
-     * Gives the user the acceptable inputAlphabet parameters from the DPA
-     * guidelines file.
+     * Gives the user the acceptable inputAlphabet parameters from the Turing
+     * Machine guidelines file.
      *
      * @return
      */

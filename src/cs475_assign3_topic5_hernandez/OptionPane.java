@@ -31,7 +31,7 @@ public class OptionPane extends WindowAdapter {
 
     /**
      * Displays in OptionPane and console if or if not the user string was
-     * accepted based on DFA guidelines.
+     * accepted based on Turing Machine guidelines.
      *
      * @param accepted
      */
