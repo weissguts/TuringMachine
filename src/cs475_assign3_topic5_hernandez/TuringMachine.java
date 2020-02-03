@@ -142,11 +142,11 @@ public class TuringMachine {
 
         for (char inputChar : input.toCharArray()) {
             System.out.println("current state is "
-                    + currentState);
+                    + currentState + ".");
             tapeList.addCells(headPosition, inputChar);
-//            if (!inputAlphabet.contains(inputChar)) {
-//                return false;
-//            }
+            if (!inputAlphabet.contains(inputChar)) {
+                return false;
+            }
 
             for (Transition transition : transitions) {
                 //If transition.getInputSymbol is blank in the inputTextFile
@@ -183,15 +183,53 @@ public class TuringMachine {
                     }
 
                 }
-
-//                System.out.println("Check " + tapeList.toString(headPosition));
             }
-
         }
         System.out.println("current state is "
                 + currentState);
-        
-        
+
+        if (tapeList.checkBasePosition(headPosition)) {
+            return false;
+        }
+        System.out.println("Initial run over. More transitions found based "
+                + "on current headPosition. Continuining run():  ");
+        while (tapeList.checkBasePosition(0)) {
+                System.out.println("Current state is "
+                    + currentState + ".");
+                
+            for (Transition transition : transitions) {
+                String tapeHead = tapeList.toString(headPosition);
+                char inputSymbolChar = transition.getInputSymbol();
+                String inputSymbolString = String.valueOf(inputSymbolChar);
+
+                boolean stateCheck = (currentState.equals(transition.getFromState()));
+                boolean boolHead = (tapeHead.equals(inputSymbolString));
+                
+                
+                System.out.println(transition.toString() + "Current head is: "
+                        + tapeHead + ".");
+
+                while (boolHead && stateCheck) {                    
+                    currentState = transition.getToState();
+                    tapeList.removeCells(headPosition);
+                    tapeList.addCells(headPosition, transition.getWriteSymbol());
+
+                    if (transition.getDirection() == 'R') {
+                        headPosition++;
+                        break;
+                    } else if (transition.getDirection() == 'L') {
+                        headPosition--;
+                        break;
+                    }
+
+                }
+                
+
+            }
+        }
+
+        System.out.println("current state is "
+                + currentState);
         if (!acceptStates.contains(currentState)) {
             return false;
         }

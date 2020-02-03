@@ -14,23 +14,21 @@ import java.util.List;
  *
  * @author Daniel Hernandez
  */
-public class Tape {    
-        
+public class Tape {
+
     public static ArrayList<Character> cells = new ArrayList<>();
     public static int headPosition;
 
-    
-    
     public Tape() {
-        this.cells.add('$');  
-        
-        //Initialize with size of 
-        for (int i = 1; i < 65; i++) {
+        this.cells.add('$');
+
+        //Initialize with size of 64 for 64bit String.
+        for (int i = 1; i < 64; i++) {
             this.cells.add(' ');
         }
-        
+
         this.headPosition = 0;
-    }   
+    }
 
     public static ArrayList<Character> getCells() {
         return cells;
@@ -39,31 +37,34 @@ public class Tape {
     public void setCells(ArrayList<Character> cells) {
         this.cells = cells;
     }
-    
+
     public void addCells(int headPosition, char charCell) {
-        cells.add(headPosition, charCell);  
-       
+        cells.add(headPosition, charCell);
+
     }
-    
+
     public void removeCells(int headPosition) {
-        cells.remove(headPosition);        
+        cells.remove(headPosition);
     }
 
     public int getHeadPosition() {
         return headPosition;
     }
 
+    //Checks to see if cells[0] is equal to $ or empty. 
+    public boolean checkBasePosition(int baseInt) {
+        if (cells.get(baseInt) == '$' || cells.get(baseInt) == ' ') {
+            return true;
+        }
+        return false;
+    }
+
     public void setHeadPosition(int headPosition) {
         this.headPosition = headPosition;
     }
-    
+
     public String toString(int headPosition) {
         return this.cells.get(headPosition).toString();
     }
-    
-
-     
-   
-    
 
 }
